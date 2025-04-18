@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chopped Nigga Detection Software</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="glass-panel">
+            <h1>Chopped Nigga Detection Software</h1>
+            <p class="subtitle">Upload your image for a detailed facial analysis</p>
+            
+            <div class="upload-container">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & Drop your image here</p>
+                    <p>or</p>
+                    <label for="fileInput" class="upload-btn">Browse Files</label>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                </div>
+                <div class="preview-container" id="previewContainer" style="display: none;">
+                    <img id="imagePreview" src="" alt="Preview">
+                    <button id="resetBtn" class="reset-btn"><i class="fas fa-redo"></i> Try Another</button>
+                </div>
+            </div>
+            
+            <div class="loading-container" id="loadingContainer" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Analyzing facial features...</p>
+            </div>
+            
+            <div class="results-container" id="resultsContainer" style="display: none;">
+                <h2>Analysis Results</h2>
+                
+                <div class="overall-score">
+                    <div class="score-circle">
+                        <span id="overallScore">0</span>
+                    </div>
+                    <h3 id="verdictText">Analyzing...</h3>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="radarChart"></canvas>
+                </div>
+                
+                <div class="detailed-scores">
+                    <div class="score-card">
+                        <h4>Hair</h4>
+                        <div class="score-bar">
+                            <div class="score-fill" id="hairScoreFill"></div>
+                            <span class="score-text" id="hairScore">0</span>
+                        </div>
+                        <p id="hairComment">-</p>
+                    </div>
+                    
+                    <div class="score-card">
+                        <h4>Jawline</h4>
+                        <div class="score-bar">
+                            <div class="score-fill" id="jawlineScoreFill"></div>
+                            <span class="score-text" id="jawlineScore">0</span>
+                        </div>
+                        <p id="jawlineComment">-</p>
+                    </div>
+                    
+                    <div class="score-card">
+                        <h4>Facial Structure</h4>
+                        <div class="score-bar">
+                            <div class="score-fill" id="facialStructureScoreFill"></div>
+                            <span class="score-text" id="facialStructureScore">0</span>
+                        </div>
+                        <p id="facialStructureComment">-</p>
+                    </div>
+                    
+                    <div class="score-card">
+                        <h4>Skin Quality</h4>
+                        <div class="score-bar">
+                            <div class="score-fill" id="skinQualityScoreFill"></div>
+                            <span class="score-text" id="skinQualityScore">0</span>
+                        </div>
+                        <p id="skinQualityComment">-</p>
+                    </div>
+                    
+                    <div class="score-card">
+                        <h4>Eye Area</h4>
+                        <div class="score-bar">
+                            <div class="score-fill" id="eyeAreaScoreFill"></div>
+                            <span class="score-text" id="eyeAreaScore">0</span>
+                        </div>
+                        <p id="eyeAreaComment">-</p>
+                    </div>
+                </div>
+                
+                <div class="tips-container">
+                    <h3>Improvement Tips</h3>
+                    <ul id="tipsList">
+                        <!-- Tips will be added here dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 Chopped Nigga Detection Software</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
