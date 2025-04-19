@@ -115,47 +115,19 @@ function startAnalysis(imageData) {
     }, 2500);
 }
 
-// Generate random number within a range, with optional skew
-function normalRandom(min, max, skew = 1) {
-    let u = 0, v = 0;
-    while(u === 0) u = Math.random();
-    while(v === 0) v = Math.random();
-    let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-    num = num / 10.0 + 0.5; // Translate to 0 -> 1
-    if (num > 1 || num < 0) return normalRandom(min, max, skew); // Resample if outside 0-1
-    num = Math.pow(num, skew); // Skew
-    num *= max - min; // Stretch to fill range
-    num += min; // Offset to min
-    return Math.round(num);
+// Generate a uniform random integer in a given range (inclusive)
+function uniformRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Generate more diverse analysis results with scores mostly in 60-80, but allow more spread and outliers
+// Generate analysis results with scores from 40 to 100, no clustering
 function generateAnalysisResults() {
-    // Decide if there will be an outlier (20% chance)
-    const outlierIndex = Math.random() < 0.2 ? Math.floor(Math.random() * 5) : -1;
-    const outlierType = Math.random() < 0.5 ? 'high' : 'low';
-
-    // Generate base scores
-    let scores = [];
-    for (let i = 0; i < 5; i++) {
-        // 80% of the time use a wide normal range, 20% of the time use an outlier
-        if (i === outlierIndex) {
-            // Outlier: high (85-95) or low (50-59)
-            if (outlierType === 'high') {
-                scores.push(normalRandom(85, 95, 1.5));
-            } else {
-                scores.push(normalRandom(50, 59, 1.5));
-            }
-        } else {
-            // Normal: 60-80, less skew for more spread
-            scores.push(normalRandom(60, 80, 1.1));
-        }
-    }
-
-    // Shuffle scores a bit to avoid patterns
-    scores = scores.sort(() => Math.random() - 0.5);
-
-    const [hairScoreValue, jawlineScoreValue, facialStructureScoreValue, skinQualityScoreValue, eyeAreaScoreValue] = scores;
+    // Generate 5 independent random scores between 40 and 100
+    const hairScoreValue = uniformRandomInt(40, 100);
+    const jawlineScoreValue = uniformRandomInt(40, 100);
+    const facialStructureScoreValue = uniformRandomInt(40, 100);
+    const skinQualityScoreValue = uniformRandomInt(40, 100);
+    const eyeAreaScoreValue = uniformRandomInt(40, 100);
 
     // Calculate overall score
     const overallScoreValue = Math.round(
